@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="cs">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Přihlášení</title>
+  <title>Login</title>
   <style>
     :root{
       --bg:#0b1220;
@@ -270,8 +270,8 @@
           <span>MyApp</span>
         </a>
         <div style="display:flex;gap:16px;">
-          <a href="index.html">Domů</a>
-          <a href="register.html">Registrace</a>
+          <a href="index.html">Home</a>
+          <a href="register.html">Sign Up</a>
         </div>
       </nav>
     </div>
@@ -280,29 +280,29 @@
   <main>
     <div class="auth-container">
       <div class="auth-card">
-        <h1>Přihlášení</h1>
-        <p>Přihlaste se do svého účtu</p>
+        <h1>Login</h1>
+        <p>Sign in to your account</p>
 
         <form>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="vás@email.com" required>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
           </div>
 
           <div class="form-group">
-            <label for="password">Heslo</label>
+            <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="••••••••" required>
           </div>
 
           <div class="forgot-password">
-            <a href="#forgot">Zapomněli jste heslo?</a>
+            <a href="#forgot">Forgot password?</a>
           </div>
 
-          <button type="submit" class="submit-btn">Přihlásit se</button>
+          <button type="submit" class="submit-btn">Sign In</button>
         </form>
 
         <div class="divider">
-          <span>nebo</span>
+          <span>or</span>
         </div>
 
         <div class="social-login">
@@ -315,7 +315,7 @@
         </div>
 
         <div class="signup-link">
-          Nemáte účet? <a href="register.html">Zaregistrujte se</a>
+          Don't have an account? <a href="register.html">Sign Up</a>
         </div>
       </div>
     </div>
@@ -324,7 +324,7 @@
   <script>
     document.querySelector('form').addEventListener('submit', function(e) {
       e.preventDefault();
-      alert('Přihlášení: ' + document.getElementById('email').value);
+      alert('Login: ' + document.getElementById('email').value);
     });
   </script>
 </body>

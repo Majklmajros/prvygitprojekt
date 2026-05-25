@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="cs">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Registrace</title>
+  <title>Sign Up</title>
   <style>
     :root{
       --bg:#0b1220;
@@ -298,8 +298,8 @@
           <span>MyApp</span>
         </a>
         <div style="display:flex;gap:16px;">
-          <a href="index.html">Domů</a>
-          <a href="login.html">Přihlášení</a>
+          <a href="index.html">Home</a>
+          <a href="login.html">Login</a>
         </div>
       </nav>
     </div>
@@ -308,22 +308,22 @@
   <main>
     <div class="auth-container">
       <div class="auth-card">
-        <h1>Registrace</h1>
-        <p>Vytvořte si nový účet</p>
+        <h1>Sign Up</h1>
+        <p>Create a new account</p>
 
         <form>
           <div class="form-group">
-            <label for="fullname">Jméno a příjmení</label>
-            <input type="text" id="fullname" name="fullname" placeholder="Jan Novák" required>
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" name="fullname" placeholder="John Smith" required>
           </div>
 
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="vás@email.com" required>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
           </div>
 
           <div class="form-group">
-            <label for="password">Heslo</label>
+            <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="••••••••" required>
             <div class="password-strength">
               <div class="strength-bar"></div>
@@ -333,20 +333,20 @@
           </div>
 
           <div class="form-group">
-            <label for="confirm-password">Potvrzení hesla</label>
+            <label for="confirm-password">Confirm Password</label>
             <input type="password" id="confirm-password" name="confirm-password" placeholder="••••••••" required>
           </div>
 
           <div class="checkbox-group">
             <input type="checkbox" id="terms" name="terms" required>
-            <label for="terms">Souhlasím s <a href="#terms">podmínkami použití</a> a <a href="#privacy">zásadami ochrany osobních údajů</a></label>
+            <label for="terms">I agree with <a href="#terms">Terms of Use</a> and <a href="#privacy">Privacy Policy</a></label>
           </div>
 
-          <button type="submit" class="submit-btn">Vytvořit účet</button>
+          <button type="submit" class="submit-btn">Create Account</button>
         </form>
 
         <div class="divider">
-          <span>nebo</span>
+          <span>or</span>
         </div>
 
         <div class="social-login">
@@ -359,7 +359,7 @@
         </div>
 
         <div class="login-link">
-          Již máte účet? <a href="login.html">Přihlaste se</a>
+          Already have an account? <a href="login.html">Login</a>
         </div>
       </div>
     </div>
@@ -393,11 +393,11 @@
       const confirmPassword = document.getElementById('confirm-password').value;
 
       if (password !== confirmPassword) {
-        alert('Hesla se neshodují!');
+        alert('Passwords don\'t match!');
         return;
       }
 
-      alert('Registrace: ' + document.getElementById('email').value);
+      alert('Sign up: ' + document.getElementById('email').value);
     });
   </script>
 </body>
