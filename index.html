@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Landing Page</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#111b2e;
+      --text:#e8eefc;
+      --muted:#a9b4d0;
+      --primary:#6d5efc;
+      --primary2:#22c55e;
+      --border:rgba(255,255,255,.10);
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 500px at 20% -10%, rgba(109,94,252,.35), transparent 60%),
+        radial-gradient(900px 450px at 90% 0%, rgba(34,197,94,.25), transparent 55%),
+        linear-gradient(180deg, var(--bg), #070b14);
+      color:var(--text);
+    }
+
+    a{color:inherit; text-decoration:none}
+
+    .container{
+      width:min(1100px, calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    /* Top bar */
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.55);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 0;
+      gap:16px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .logo-badge{
+      width:34px;height:34px;
+      display:grid;place-items:center;
+      border-radius:12px;
+      background: linear-gradient(135deg, rgba(109,94,252,.95), rgba(34,197,94,.80));
+      box-shadow:0 14px 30px rgba(109,94,252,.25);
+      border:1px solid rgba(255,255,255,.15);
+    }
+    .nav a{
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+      transition:.2s;
+    }
+    .nav a:hover{
+      color:var(--text);
+      border-color: var(--border);
+      background: rgba(255,255,255,.04);
+    }
+
+    /* Hero */
+    .hero{
+      padding:54px 0 26px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns:1fr;}
+    }
+
+    .hero-card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:28px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(700px 240px at 10% 0%, rgba(109,94,252,.35), transparent 60%);
+      pointer-events:none;
+    }
+    .hero-content{position:relative}
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      border-radius:999px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      box-shadow:0 0 0 6px rgba(109,94,252,.18);
+    }
+
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(30px, 4.2vw, 48px);
+      line-height:1.08;
+      letter-spacing:-.6px;
+    }
+    .lead{
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.6;
+      margin:0 0 18px;
+      max-width:62ch;
+    }
+
+    .cta-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:12px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius:14px;
+      border:1px solid transparent;
+      font-weight:700;
+      cursor:pointer;
+      transition:.18s;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      background: linear-gradient(135deg, rgba(109,94,252,1), rgba(109,94,252,.75));
+      border-color: rgba(255,255,255,.15);
+      box-shadow:0 18px 40px rgba(109,94,252,.25);
+    }
+    .btn-primary:hover{transform: translateY(-1px); filter:saturate(1.05)}
+    .btn-ghost{
+      background: rgba(255,255,255,.03);
+      border-color: var(--border);
+      color:var(--text);
+    }
+    .btn-ghost:hover{background: rgba(255,255,255,.06)}
+
+    .hero-aside{
+      background: rgba(17,27,46,.55);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .aside-item{
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:14px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .aside-icon{
+      width:34px;height:34px;
+      border-radius:12px;
+      background: rgba(109,94,252,.18);
+      border:1px solid rgba(109,94,252,.35);
+      display:grid;place-items:center;
+      flex:0 0 auto;
+    }
+    .aside-title{font-weight:800; margin:0 0 4px}
+    .aside-text{margin:0; color:var(--muted); font-size:14px; line-height:1.5}
+
+    /* Sections */
+    section{padding:22px 0}
+
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:12px;
+    }
+    h2{
+      margin:0;
+      font-size:22px;
+      letter-spacing:-.3px;
+    }
+    .section-sub{
+      color:var(--muted);
+      margin:0;
+      font-size:14px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 900px){
+      .grid-3{grid-template-columns:1fr;}
+    }
+
+    .feature{
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      min-height:140px;
+      transition:.2s;
+      position:relative;
+      overflow:hidden;
+    }
+    .feature:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18)}
+    .feature::after{
+      content:"";
+      position:absolute;
+      width:260px;height:260px;
+      right:-160px;top:-170px;
+      border-radius:50%;
+      background: radial-gradient(circle at center, rgba(109,94,252,.25), transparent 55%);
+      pointer-events:none;
+    }
+
+    .feature h3{margin:10px 0 6px; font-size:16px}
+    .feature p{margin:0; color:var(--muted); line-height:1.6; font-size:14px}
+
+    .feature .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 11px;
+      border-radius:999px;
+      background: rgba(109,94,252,.12);
+      border:1px solid rgba(109,94,252,.28);
+      color: #dfe1ff;
+      font-size:13px;
+      font-weight:700;
+      position:relative;
+      z-index:1;
+    }
+
+    /* Contact */
+    .contact-card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    form{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      align-items:start;
+    }
+    @media (max-width: 700px){
+      form{grid-template-columns:1fr;}
+    }
+    label{display:block; font-size:13px; color:var(--muted); margin-bottom:6px}
+
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(7,11,20,.45);
+      color:var(--text);
+      outline:none;
+      transition:.18s;
+    }
+    input:focus, textarea:focus{
+      border-color: rgba(109,94,252,.5);
+      box-shadow:0 0 0 4px rgba(109,94,252,.18);
+    }
+
+    textarea{grid-column: 1 / -1; min-height:110px; resize:vertical;}
+
+    .form-actions{
+      grid-column: 1 / -1;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:4px;
+    }
+    .fineprint{color:var(--muted); font-size:13px; line-height:1.4}
+
+    /* Footer */
+    footer{padding:28px 0 40px; color:var(--muted)}
+    .footer-row{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; border-top:1px solid var(--border); padding-top:18px;}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="logo" aria-label="Logo">
+          <div class="logo-badge">⚡</div>
+          <div>Moje Landing</div>
+        </div>
+        <nav style="display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;">
+          <a href="#features">Výhody</a>
+          <a href="#about">O nás</a>
+          <a href="#contact">Kontakt</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container hero">
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="hero-content">
+            <div class="kicker"><span class="dot"></span> Rychlé. Moderní. Responzivní.</div>
+            <h1>Vytvořte si vlastní stránku za pár minut.</h1>
+            <p class="lead">Tahle šablona je jednoduchá landing page s hezkým designem, responzivním layoutem a tlačítky připravenými pro CTA. Stačí vyměnit texty a je to.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#contact" aria-label="Přejít na kontakt">
+                Kontaktovat nás <span aria-hidden="true">→</span>
+              </a>
+              <a class="btn btn-ghost" href="#features" aria-label="Zobrazit výhody">
+                Zobrazit výhody
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-aside" aria-label="Rychlé informace">
+          <div class="aside-item">
+            <div class="aside-icon">🧩</div>
+            <div>
+              <p class="aside-title">Modulární sekce</p>
+              <p class="aside-text">Hero, výhody, kontakt a footer — vše v jednom souboru.</p>
+            </div>
+          </div>
+          <div class="aside-item">
+            <div class="aside-icon" style="background: rgba(34,197,94,.14); border-color: rgba(34,197,94,.35);">⚙️</div>
+            <div>
+              <p class="aside-title">Responzivní layout</p>
+              <p class="aside-text">Vypadá dobře na mobilu, tabletu i desktopu.</p>
+            </div>
+          </div>
+          <div class="aside-item">
+            <div class="aside-icon" style="background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18);">🔒</div>
+            <div>
+              <p class="aside-title">Bez backendu</p>
+              <p class="aside-text">Formulář je demo; bez odesílání na server.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Proč právě tahle stránka</h2>
+            <p class="section-sub">Jednoduché, čisté a účelné — přesně jak má být na start.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="feature">
+            <div class="pill">✨ Design</div>
+            <h3>Moderní vizuál</h3>
+            <p>Gradient pozadí, karty, jemné stíny a tlačítka s konzistentním stylem.</p>
+          </article>
+          <article class="feature">
+            <div class="pill" style="background: rgba(34,197,94,.12); border-color: rgba(34,197,94,.28)">🚀 Rychlost</div>
+            <h3>Lehká šablona</h3>
+            <p>Vše je v jednom HTML souboru (bez knihoven). Rychlé načítání.</p>
+          </article>
+          <article class="feature">
+            <div class="pill" style="background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.22); color: #e8eefc">📱 Mobil</div>
+            <h3>Responzivní</h3>
+            <p>Grid se přepne na jednu sloupcovou strukturu podle šířky obrazovky.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>O sekci</h2>
+            <p class="section-sub">Můžeš tady popsat službu/produkt, hodnoty nebo zkušenosti.</p>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div style="display:grid; grid-template-columns: 1.1fr .9fr; gap:16px; align-items:start;">
+            <div>
+              <p style="margin:0; color:var(--muted); line-height:1.7;">
+                Tohle je jednoduchý blok „O nás“. Vlož sem vlastní texty. Případně přidej odrážky, klíčová čísla nebo krátké vysvětlení,
+                proč návštěvníky láká právě tvá nabídka.
+              </p>
+              <div class="cta-row" style="margin-top:16px">
+                <a class="btn btn-primary" href="#contact">Začít teď</a>
+                <a class="btn btn-ghost" href="#features">Prohlédnout výhody</a>
+              </div>
+            </div>
+            <div style="background: rgba(255,255,255,.03); border:1px solid var(--border); border-radius:var(--radius); padding:16px;">
+              <div style="display:flex; justify-content:space-between; gap:10px; margin-bottom:10px">
+                <div>
+                  <div style="font-weight:900; font-size:20px">+120%</div>
+                  <div style="color:var(--muted); font-size:13px">demo metrika</div>
+                </div>
+                <div>
+                  <div style="font-weight:900; font-size:20px">2–3h</div>
+                  <div style="color:var(--muted); font-size:13px">čas na úpravu</div>
+                </div>
+              </div>
+              <div style="color:var(--muted); font-size:14px; line-height:1.6">
+                Statistiky jsou jen placeholder. Nahraď je reálnými hodnotami.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Kontakt</h2>
+            <p class="section-sub">Demo formulář — po odeslání jen zobrazí potvrzení v prohlížeči.</p>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <form id="contactForm">
+            <div>
+              <label for="name">Jméno</label>
+              <input id="name" name="name" type="text" placeholder="Např. Jan Novák" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="napr@domena.cz" required />
+            </div>
+            <div style="grid-column: 1 / -1;">
+              <label for="message">Zpráva</label>
+              <textarea id="message" name="message" placeholder="Napiš nám, co potřebuješ..." required></textarea>
+            </div>
+
+            <div class="form-actions">
+              <div class="fineprint">Odesláním souhlasíš se zpracováním údajů (demo).</div>
+              <button class="btn btn-primary" type="submit">Odeslat zprávu</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div>© <span id="year"></span> Moje Landing. Všechna práva vyhrazena.</div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="#" style="color:var(--muted)" onclick="event.preventDefault(); alert('Demo link');">Podmínky</a>
+          <a href="#" style="color:var(--muted)" onclick="event.preventDefault(); alert('Demo link');">Soukromí</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const year = document.getElementById('year');
+    year.textContent = new Date().getFullYear();
+
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      alert('Díky, ' + (name || 'návštěvníku') + '! Zpráva byla v demo režimu odeslána.');
+      form.reset();
+    });
+  </script>
+</body>
+</html>
+
